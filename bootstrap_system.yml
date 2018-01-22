@@ -2,7 +2,8 @@
 - hosts: all
   remote_user: brycemcd
   tasks:
-  - import_tasks: packages.yml
+  #- import_tasks: packages.yml
   #- import_tasks: install_preference_files.yml
   #- import_tasks: install_zoom.yml
   #- import_tasks: install_mattermost.yml
+  - import_tasks: install_slack.yml

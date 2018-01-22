@@ -1,0 +1,14 @@
+---
+  - name: download slack deb first
+    get_url:
+        url: https://downloads.slack-edge.com/linux_releases/slack-desktop-3.0.5-amd64.deb
+        dest: /tmp/slack.deb
+        checksum: sha256:1a49e8e83d950b517a5921c5780ddd19e5a9b1ec7787bc1fd8e5b214422d358e
+        mode: 0744
+
+  - name: install slack deb
+    become: yes
+    become_method: sudo
+    apt:
+      deb: /tmp/slack.deb
+      autoclean: yes
