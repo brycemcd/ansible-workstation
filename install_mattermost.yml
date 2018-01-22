@@ -1,0 +1,16 @@
+---
+  # NOTE: when I attempted installing directly from the internet, I would get
+  # a timeout error
+  - name: download mattermost deb first
+    get_url:
+        url: https://releases.mattermost.com/desktop/3.7.1/mattermost-desktop-3.7.1-linux-amd64.deb
+        dest: /tmp/mattermost.deb
+        checksum: sha256:93bc81e9a4508de07c50bcd28217a693ba3a67b59775bece51c1f5b2ead7d0af
+        mode: 0744
+
+  - name: install mattermost deb
+    become: yes
+    become_method: sudo
+    apt:
+      deb: /tmp/mattermost.deb
+      autoclean: yes

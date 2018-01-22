@@ -1,0 +1,15 @@
+---
+  # NOTE: when I attempted installing directly from the internet, I would get
+  # a timeout error
+  - name: download zoom deb first
+    get_url:
+        url: https://zoom.us/client/latest/zoom_amd64.deb
+        dest: /tmp/zoom.deb
+        mode: 0744
+
+  - name: install zoom meeting client
+    become: yes
+    become_method: sudo
+    apt:
+      deb: /tmp/zoom.deb
+      autoclean: yes

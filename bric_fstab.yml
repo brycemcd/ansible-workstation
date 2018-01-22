@@ -1,0 +1,18 @@
+---
+- hosts: bric
+  become: yes
+  become_method: sudo
+  tasks:
+  - file:
+      path: /media/brycemcd/bkp
+      owner: brycemcd
+      group: brycemcd
+      mode: 0750
+      state: directory
+
+  - lineinfile:
+      path: /etc/fstab
+      line: "UUID=14a9c391-0a59-451b-be6b-41b582b8a48a  /media/brycemcd/bkp  ext4  errors=remount-ro 0 2"
+
+  - name: Mount disk
+    command: mount -a
