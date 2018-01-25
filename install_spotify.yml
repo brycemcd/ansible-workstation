@@ -1,0 +1,5 @@
+---
+  - name: Install Spotify
+    command: snap install spotify --classic
+    become: yes
+    become_method: sudo
