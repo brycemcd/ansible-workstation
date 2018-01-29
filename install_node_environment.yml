@@ -1,0 +1,61 @@
+---
+- hosts: all
+  tasks:
+
+  - get_url:
+      url: https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.xz
+      dest: /tmp/nodejs.tar.xz
+
+  - name: untar node and move it
+    unarchive:
+      src: /tmp/nodejs.tar.xz
+      dest: /usr/local/src/
+
+    become: yes
+    become_method: sudo
+
+    # TODO: most of these values should be variables
+  - file:
+      path: /usr/local/src/node-v8.9.4-linux-x64
+      owner: brycemcd
+      group: brycemcd
+      mode: 0755
+      recurse: yes
+    become: yes
+    become_method: sudo
+
+  - name: Put node in path
+    file:
+      dest: /usr/local/bin/node
+      src: /usr/local/src/node-v8.9.4-linux-x64/bin/node
+      state: link
+
+    become: yes
+    become_method: sudo
+
+  - name: Put npm in path
+    file:
+      dest: /usr/bin/npm
+      src: /usr/local/src/node-v8.9.4-linux-x64/bin/npm
+      state: link
+
+    become: yes
+    become_method: sudo
+
+  - name: Put npm in another path because ??
+    file:
+      dest: /usr/local/bin/npm
+      src: /usr/local/src/node-v8.9.4-linux-x64/bin/npm
+      state: link
+
+    become: yes
+    become_method: sudo
+
+  - name: allow brycemcd to write (install globally) to node_modules
+    file:
+      path: /usr/local/src/node-v8.9.4-linux-x64/lib/node_modules
+      owner: brycemcd
+      group: brycemcd
+      mode: 0755
+    become: yes
+    become_method: sudo
