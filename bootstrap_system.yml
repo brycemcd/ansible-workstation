@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  remote_user: brycemcd
   tasks:
   #- import_tasks: packages.yml
   #- import_tasks: install_preference_files.yml
