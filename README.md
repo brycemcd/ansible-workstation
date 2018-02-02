@@ -22,6 +22,12 @@ $ sudo apt-add-repository ppa:ansible/ansible
 $ sudo apt-get update
 $ sudo apt-get install ansible
 ```
+
+## Install this Repo
+
+* Download the zip file of this repo (since git isn't installed yet)
+* `ansible-playbook -i hosts.yml bootstrap_system.yml`
+
 ## SERMO Specific
 
 I work from home a lot and naturally some of my tasks are more
