@@ -1,0 +1,5 @@
+---
+  - name: install pycharm
+    command: snap install pycharm-professional --classic
+    become: yes
+    become_method: sudo

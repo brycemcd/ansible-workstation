@@ -1,0 +1,9 @@
+---
+# NOTE: very helpful: https://stackoverflow.com/questions/14788345/how-to-install-jdk-on-ubuntu-linux
+- hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+    - apt:
+        name: openjdk-8-jdk

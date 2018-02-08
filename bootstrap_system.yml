@@ -1,9 +1,9 @@
 ---
 - hosts: all
   tasks:
-  #- import_tasks: packages.yml
-  #- import_tasks: install_preference_files.yml
-  #- import_tasks: install_zoom.yml
-  #- import_tasks: install_mattermost.yml
-  #- import_tasks: install_slack.yml
+  - import_tasks: packages.yml
+  - import_tasks: install_preference_files.yml
+  - import_tasks: install_slack.yml
   - import_tasks: install_spotify.yml
+  - import_tasks: install_pycharm.yml
+  - import_tasks: install_intellij.yml
