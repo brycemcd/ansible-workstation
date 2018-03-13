@@ -1,0 +1,15 @@
+---
+# Installs lein from scratch
+- hosts: all
+  become: yes
+  become_method: sudo
+
+  tasks:
+
+    # Dear Lein (and Clojure community in general): I <3 you.
+    - get_url:
+        url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+        dest: /usr/local/bin
+        mode: 0755
+
+    - command: lein
