@@ -13,9 +13,9 @@
         - ruby # get a system ruby installed so I can install my vim plugins
         - curl
         - postgresql-client-common
-        #- postgresql-client-9.6
         - openssh-server
         - net-tools
+        - kazam # screenshot tool
 
     become: yes
     become_method: sudo
