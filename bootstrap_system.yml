@@ -1,9 +1,12 @@
 ---
 - hosts: all
   tasks:
-  - import_tasks: packages.yml
-  - import_tasks: install_preference_files.yml
-  - import_tasks: install_slack.yml
-  - import_tasks: install_spotify.yml
-  - import_tasks: install_pycharm.yml
-  - import_tasks: install_intellij.yml
+  #- import_tasks: packages.yml
+  #- import_tasks: install_preference_files.yml
+  #- import_tasks: install_slack.yml
+  #- import_tasks: install_spotify.yml
+  #- import_tasks: install_pycharm.yml
+  #- import_tasks: install_intellij.yml
+  - import_tasks: install_docker.yml
+    become: yes
+    become_method: sudo
