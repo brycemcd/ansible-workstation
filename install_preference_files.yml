@@ -1,9 +1,17 @@
 ---
   - name: install tmux prefs
-    get_url:
-        url: https://gist.githubusercontent.com/brycemcd/c43f5a3250256cd65686/raw/.tmux.conf
-        dest: ~/.tmux.conf
-        mode: 0744
+    template:
+      src: templates/tmux.conf
+      dest: ~/.tmux.conf
+      owner: brycemcd
+      group: brycemcd
+      mode: 0744
+
+  #- name: install tmux prefs
+    #get_url:
+        #url: https://gist.githubusercontent.com/brycemcd/c43f5a3250256cd65686/raw/.tmux.conf
+        #dest: ~/.tmux.conf
+        #mode: 0744
 
   - file:
         state: absent
