@@ -7,12 +7,6 @@
       group: brycemcd
       mode: 0744
 
-  #- name: install tmux prefs
-    #get_url:
-        #url: https://gist.githubusercontent.com/brycemcd/c43f5a3250256cd65686/raw/.tmux.conf
-        #dest: ~/.tmux.conf
-        #mode: 0744
-
   - file:
         state: absent
         force: yes
@@ -23,20 +17,18 @@
     args:
       executable: /bin/bash
 
-  - name: install .vimrc before/after
-    get_url:
-        url: https://gist.githubusercontent.com/brycemcd/c43f5a3250256cd65686/raw/.vimrc.after
-        dest: ~/.vimrc.after
-        mode: 0744
+  - name: install vimrc after
+    template:
+      src: templates/vimrc.after.j2
+      dest: ~/.vimrc.after
+      owner: brycemcd
+      group: brycemcd
+      mode: 0744
 
-  - get_url:
-        url: https://gist.githubusercontent.com/brycemcd/c43f5a3250256cd65686/raw/.vimrc.before
-        dest: ~/.vimrc.before
-        mode: 0744
-
-  - authorized_key:
-        user: brycemcd
-        key: https://github.com/brycemcd.keys
-
-
-
+  - name: install vimrc before
+    template:
+      src: templates/vimrc.before.j2
+      dest: ~/.vimrc.before
+      owner: brycemcd
+      group: brycemcd
+      mode: 0744

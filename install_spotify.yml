@@ -1,34 +1,6 @@
----
-  - name: Add Spotify's apt key 
-    apt_key:
-      keyserver: keyserver.ubuntu.com
-      id: 0DF731E45CE24F27EEEB1450EFDC8610341D9410
-
-    become: yes
-    become_method: sudo
-
-  - file:
-      path: /etc/apt/sources.list.d/spotify.list
-      state: touch
-      mode: 0755
-    become: yes
-    become_method: sudo
-
-  - lineinfile:
-      path: /etc/apt/sources.list.d/spotify.list
-      line: deb http://repository.spotify.com stable non-free
-
-    become: yes
-    become_method: sudo
-  - apt:
-      name: spotify-client
-      state: latest
-      update_cache: yes
-      install_recommends: yes
-
-    become: yes
-    become_method: sudo
-#- name: Install Spotify
-  #command: snap install spotify --classic
-  #become: yes
-  #become_method: sudo
+# Install a snap with classic confinement
+ - name: Install spotify with option --classic
+   snap:
+     name: spotify
+     classic: yes
+   become: true

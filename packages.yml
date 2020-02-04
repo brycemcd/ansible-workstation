@@ -1,11 +1,22 @@
 ---
+  - authorized_key:
+      user: brycemcd
+      key: https://github.com/brycemcd.keys
+
+  - name: Install aws-cli
+    snap:
+      name: aws-cli
+      classic: yes
+    become: true
+
   - name: install packages
+    become: yes
+    become_method: sudo
     apt:
-        name: "{{item}}"
-        state: latest
-        update_cache: yes
-        install_recommends: yes
-    with_items:
+      state: latest
+      update_cache: yes
+      install_recommends: yes
+      pkg:
         - zsh
         - git
         - vim
@@ -17,5 +28,3 @@
         - net-tools
         - kazam # screenshot tool
 
-    become: yes
-    become_method: sudo

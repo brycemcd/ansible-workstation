@@ -1,0 +1,87 @@
+filetype indent on
+syntax enable
+colorscheme jellybeans
+set t_Co=256
+"let g:solarized_termcolors=256
+set background=dark
+"colorscheme solarized
+
+set colorcolumn=80
+highlight ColorColumn guibg=Maroon ctermbg=124
+set wrap
+set showbreak="..."
+
+function! LinesChanged()
+  let dif=system('git diff --stat -- '. bufname('%') .'| cut -d"|" -f2 | head -n 1')
+  return dif
+endfunction
+
+" statusbar:
+set statusline= " clear the line
+set statusline+=Buf:#%n\ %f\ %m\ %r
+set statusline+=\ Line:%l/%L\ [%p%%]
+set statusline+=\ Col:%c
+set statusline+=%= " move to the right
+set statusline+=\ %{LinesChanged()}
+
+" so Ack works
+" let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+" replace Ack with silver searcher (thoughtbot says it's better)
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nmap <leader>K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  'node_modules',
+      \ }
+
+"git gutter stuff https://github.com/airblade/vim-gitgutter
+"EnableGitGutterLineHighlights
+
+command! -nargs=1 Silent
+      \ | execute ':silent !' <q-args>
+      \ | execute ':redraw!'
+
+" TESTS
+" test the current file in the next tmux pane
+nmap <leader>tt :Silent tmux send-keys -t 1.1 "time rspec %" C-m <cr>
+" test the line from user input
+nmap <leader>tl :Silent tmux send-keys -t 1.1 "bundle exec rspec % --line_number <C-r>=line('.')<cr>" C-m <cr>
+" swap the smaller bottom pane and push it to a new, bigger window
+" nmap <leader>sp :Silent tmux swap-pane -s 0.1 -t 1.0 C-m <cr>
+"nmap <leader>se :Silent tmux send-keys -t 0.1 "mysql -u web -pweb01 --column-names verbit_20131015 < %" C-m <cr>
+nmap <leader>se :Silent tmux send-keys -t 2.1 "mysql -u web -pweb01 verbit_20131015 < %" C-m <cr>
+nmap <leader>cf :!cat % <cr>
+
+" insert timestamp in insert mode:
+nmap <leader>its i<C-R>=strftime("%e %b %Y - %H:%M%P")<CR>
+
+nmap <leader>nh :nohls<cr>
+
+" add checkboxes more easily:
+imap cb + [ ]
+imap ccb + [x]
+
+" auto spell check markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+" uncomment things
+map <leader>uc :s/#//<cr>
+
+" search for things in visual mode! (why isn't this default?)
+vmap * y/\V<C-R>"<CR>
+
+map <leader>ot :vsplit<cr>:A<cr>
