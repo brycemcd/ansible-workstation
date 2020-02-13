@@ -1,0 +1,6 @@
+# Install a snap with classic confinement
+ - name: Install vscode with option --classic
+   snap:
+     name: code
+     classic: yes
+   become: true
